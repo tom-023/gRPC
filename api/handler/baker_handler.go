@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"fmt"
 	"math/rand"
 	"sync"
 	"time"
@@ -51,6 +52,8 @@ func (h *BakerHandler) Bake(
 	h.report.Lock()
 	h.report.data[req.Menu] = h.report.data[req.Menu] + 1
 	h.report.Unlock()
+
+	fmt.Printf("Baked a pancake for %v !\n", ctx.Value("UserName"))
 
 	//レスポンスを作って返します
 	return &api.BakeResponse{
